@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="heading-row"><div><h1>Admin dashboard</h1><p class="muted">Review complaints and update their progress.</p></div><a href="{{ url_for('admin_logout') }}">Log out</a></div>
+<section class="stats">
+  <div class="stat"><span>Total</span><strong>{{ counts.total }}</strong></div>
+  <div class="stat"><span>Pending</span><strong>{{ counts.pending }}</strong></div>
+  <div class="stat"><span>In progress</span><strong>{{ counts.progress }}</strong></div>
+  <div class="stat"><span>Resolved</span><strong>{{ counts.resolved }}</strong></div>
+</section>
+<div class="panel">
+  <h2>All complaints</h2>
+  {% if complaints %}
+<div class="panel">
+  <h2>Student Feedback</h2>
+  {% for c in complaints %}
+    {% if c.feedback %}
+      <p><strong>{{ c.ticket_id }}</strong></p>
+      <p>{{ c.feedback }}</p>
+      <hr>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+  {% if complaints %}
+  <div class="table-wrap"><table>
+    <thead><tr><th>Ticket</th><th>Student</th><th>Issue</th><th>Location</th><th>Status</th><th>Update</th></tr></thead>
+    <tbody>{% for c in complaints %}
+    <tr>
+      <td>{{ c.ticket_id }}<small>{{ c.created_at }}</small></td>
+      <td>{{ c.student_name }}<small>{{ c.email }}</small></td>
+      <td><strong>{{ c.category }}</strong><small>{{ c.description }}</small></td>
+      <td>{{ c.location }}</td>
+      <td><span class="status">{{ c.status }}</span></td>
+      <td><form class="inline-form" method="post" action="{{ url_for('update_status', ticket_id=c.ticket_id) }}">
+        <select name="status">{% for s in statuses %}<option value="{{ s }}" {% if s == c.status %}selected{% endif %}>{{ s }}</option>{% endfor %}</select>
+        <button class="button small" type="submit">Save</button>
+      </form></td>
+    </tr>{% endfor %}</tbody>
+  </table></div>
+  {% else %}<p class="muted">No complaints have been submitted yet. Add a sample complaint from the student page.</p>{% endif %}
+</div>
+{% endblock %}

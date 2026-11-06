@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Complaint Submitted{% endblock %}
+{% block content %}
+<div class="panel narrow center">
+  <div class="success-icon">✓</div><h1>Complaint submitted!</h1>
+  <p>Your ticket ID is:</p><p class="ticket">{{ ticket_id }}</p>
+  <p class="muted">Save this ID. You will also need the email address entered in the form to track your complaint.</p>
+  <a class="button" href="{{ url_for('track') }}">Track complaint</a>
+</div>
+{% endblock %}

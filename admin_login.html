@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<div class="panel narrow">
+  <h1>Administrator login</h1>
+  <p class="muted">Demo access for the project administrator.</p>
+  <form method="post">
+    <label>Admin password</label><input type="password" name="password" required>
+    <button class="button" type="submit">Log in</button>
+  </form>
+  <p class="note">For local demonstration only, the starter password is <code>change-me</code>. Change it before presenting.</p>
+</div>
+{% endblock %}

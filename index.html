@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Smart Campus | Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">A smarter way to improve campus life</p>
+  <h1>Your campus. Your voice. Better solutions.</h1>
+  <p>Report campus facility issues, receive a ticket ID and follow progress from one place.</p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('submit_complaint') }}">Submit a complaint</a>
+    <a class="button secondary" href="{{ url_for('track') }}">Track a complaint</a>
+  </div>
+</section>
+<section class="grid">
+  <article class="feature"><span>📝</span><h3>Easy reporting</h3><p>Submit issues about classrooms, hostels, Wi-Fi and more.</p></article>
+  <article class="feature"><span>🔎</span><h3>Transparent tracking</h3><p>Use your ticket ID and email to check the latest status.</p></article>
+  <article class="feature"><span>🛠️</span><h3>Admin management</h3><p>Administrators can review complaints and update progress.</p></article>
+</section>
+<p class="note">This is a student-built prototype. Do not enter real sensitive or confidential information.</p>
+{% endblock %}

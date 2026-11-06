@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Submit Complaint{% endblock %}
+{% block content %}
+<div class="panel narrow">
+  <h1>Submit a complaint</h1>
+  <p class="muted">Describe the campus issue clearly. Fields marked * are required.</p>
+  <form method="post">
+    <label>Your name *</label><input name="student_name" required maxlength="80">
+    <label>Email address *</label><input type="email" name="email" required maxlength="120">
+    <label>Complaint category *</label>
+    <select name="category" required>
+      <option value="">Choose a category</option>
+      {% for category in categories %}<option>{{ category }}</option>{% endfor %}
+    </select>
+    <label>Location (building / block / room) *</label><input name="location" required maxlength="120">
+    <label>Describe the problem *</label><textarea name="description" rows="5" required maxlength="1000"></textarea>
+    <button class="button" type="submit">Submit complaint</button>
+  </form>
+</div>
+{% endblock %}
