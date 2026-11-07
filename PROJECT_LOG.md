@@ -31,3 +31,24 @@ Future Improvements
 - Perform further testing and bug fixes.
 Note
 This log records genuine development activities and working time. It will be updated as the project progresses.
+## Latest Development Update – Website Design Improvements
+
+### Completed Work
+- Improved the website colour theme with a professional blue design.
+- Enhanced the navigation bar and hover effects.
+- Improved button styling and animations.
+- Redesigned cards, panels and form input fields.
+- Added visual focus effects to form fields.
+- Introduced colour-coded complaint status badges:
+  - Pending – Yellow
+  - In Progress – Blue
+  - Resolved – Green
+- Updated `static/style.css`.
+- Updated `templates/track.html`.
+- Tested the updated website successfully in the browser.
+- Uploaded both updated files to GitHub.
+
+### Future Work
+- Improve the admin dashboard design.
+- Add more user-friendly features.
+- Perform final testing and documentation.
