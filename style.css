@@ -91,3 +91,262 @@ textarea{
 .table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:12px;border-bottom:1px solid #eee;vertical-align:top}th{background:#f7f7fb}td small{display:block;color:var(--muted);max-width:210px;margin-top:4px}.inline-form{display:flex;gap:5px;min-width:150px}.inline-form select{padding:7px}
 .note{font-size:12px;color:var(--muted);margin:20px 0}footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.hero{padding:38px 24px}.container{margin:22px auto}.topbar{padding:15px 20px}.heading-row{align-items:flex-start;flex-direction:column}}
+.admin-header a.button.secondary {
+  background:#173B67;
+  color:#ffffff;
+  border:1px solid #173B67;
+  font-weight:700;
+
+}
+.admin-header a.button.secondary:hover{
+  background:#2878D0;
+  color:#ffffff;
+}
+/* Admin Dashboard Statistics */
+.stats .stat{
+  border-top:4px solid #2878D0;
+  background:linear-gradient(145deg,#ffffff,#f3f7fc);
+}
+
+.stats .stat:nth-child(1){
+  border-top-color:#2878D0;
+}
+
+.stats .stat:nth-child(2){
+  border-top-color:#E5A52B;
+}
+
+.stats .stat:nth-child(3){
+  border-top-color:#2878D0;
+}
+
+.stats .stat:nth-child(4){
+  border-top-color:#23945D;
+}
+
+.stats .stat strong{
+  display:block;
+  font-size:32px;
+  color:#173B67;
+  margin-top:10px;
+}
+
+.stats .stat span{
+  font-weight:700;
+  color:#64748B;
+}
+.stats .stat:nth-child(1) strong{
+  color:#8055B7;
+}
+
+.stats .stat:nth-child(2) strong{
+  color:#D99516;
+}
+
+.stats .stat:nth-child(3) strong{
+  color:#2878D0;
+}
+
+.stats .stat:nth-child(4) strong{
+  color:#23945D;
+}
+/* Admin statistics table layout */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  background:#ffffff;
+  border:1px solid #dce6f1;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(23,59,103,0.07);
+}
+
+.stats .stat{
+  border:0;
+  border-top:4px solid #2878D0;
+  border-radius:0;
+  box-shadow:none;
+  text-align:center;
+  padding:24px 12px;
+}
+
+.stats .stat:nth-child(1){border-top-color:#8055B7;}
+.stats .stat:nth-child(2){border-top-color:#E5A52B;}
+.stats .stat:nth-child(3){border-top-color:#2878D0;}
+.stats .stat:nth-child(4){border-top-color:#23945D;}
+
+.stats .stat:hover{
+  transform:none;
+  box-shadow:none;
+}
+
+
+
+@media(max-width:650px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+/* Individual dashboard statistic boxes */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+
+.stats .stat{
+  border:2px solid #8055B7;
+  border-radius:14px;
+  background:#ffffff;
+  padding:24px 15px;
+  text-align:center;
+  box-shadow:0 5px 18px rgba(23,59,103,0.07);
+}
+
+.stats .stat:nth-child(1){
+  border-color:#8055B7;
+}
+
+.stats .stat:nth-child(2){
+  border-color:#E5A52B;
+}
+
+.stats .stat:nth-child(3){
+  border-color:#2878D0;
+}
+
+.stats .stat:nth-child(4){
+  border-color:#23945D;
+}
+
+.stats .stat + .stat{
+  border-left:2px solid;
+}
+
+@media(max-width:650px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+.stats .stat:nth-child(1){
+    border:2px solid #8055B7;
+}
+.stats .stat:nth-child(2){
+    border:2px solid #E5A52B;
+}
+.stats .stat:nth-child(3){
+    border:2px solid #2878D0;
+}
+.stats .stat:nth-child(4){
+    border:2px solid #23945D;
+}
+.stats .stat:nth-child(1){
+    border-left:2px solid #8055B7;
+}
+.stats .stat:nth-child(2){
+    border-left:2px solid #E5A52B;
+}
+.stats .stat:nth-child(3){
+    border-left:2px solid #2878D0;
+}
+.stats .stat:nth-child(4){
+    border-left:2px solid #23945D;
+}
+/* Student Feedback Cards */
+
+.dashboard-section{
+  margin-top:24px;
+}
+
+.feedback-item{
+  background:#f3f7fc;
+  border:1px solid #dce6f1;
+  border-left:4px solid #2878D0;
+  border-radius:10px;
+  padding:18px;
+  margin-top:15px;
+  transition:transform 0.3s ease,box-shadow 0.3s ease;
+}
+
+.feedback-item:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 16px rgba(23,59,103,0.10);
+}
+
+.feedback-item strong{
+  color:#205da5;
+  font-size:15px;
+}
+
+.feedback-item p{
+  color:#475569;
+  line-height:1.6;
+  margin-bottom:0;
+}
+/* Professional Admin Complaints Table */
+
+.table-wrap{
+  overflow-x:auto;
+  border-radius:12px;
+  border:1px solid #dce6f1;
+  margin-top:18px;
+}
+
+.table-wrap table{
+  width:100%;
+  border-collapse:collapse;
+  background:#ffffff;
+}
+
+.table-wrap thead{
+  background:#173B67;
+  color:#ffffff;
+}
+
+.table-wrap th{
+  padding:16px 14px;
+  text-align:left;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.table-wrap td{
+  padding:15px 14px;
+  border-bottom:1px solid #e5edf5;
+  color:#334155;
+  vertical-align:top;
+}
+
+.table-wrap tbody tr:nth-child(even){
+  background:#f3f7fc;
+}
+
+.table-wrap tbody tr:hover{
+  background:#eaf2fc;
+}
+
+.table-wrap tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.table-wrap td small{
+  display:block;
+  margin-top:6px;
+  color:#64748b;
+  line-height:1.5;
+}
+/* Make compalint table headings clearly visible */
+.table-wrap thead th{
+  background:#173B67;
+  color:#ffffff;
+  padding:16px 14px;
+  font - weight:700;
+  text-align:left;
+}
