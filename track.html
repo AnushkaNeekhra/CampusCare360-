@@ -15,7 +15,9 @@
     <p><strong>Location:</strong> {{ complaint.location }}</p>
     <p><strong>Description:</strong> {{ complaint.description }}</p>
     <p><strong>Submitted:</strong> {{ complaint.created_at }}</p>
-    <p><strong>Status:</strong> <span class="status">{{ complaint.status }}</span></p>
+    <p><strong>Status:</strong><span class="status {{ complaint.status|lower|replace(' ', '-') }}">
+  {{ complaint.status }}
+</span></p>
     {% if complaint.status == "Resolved" %}
 <form method="post" action="{{ url_for('feedback') }}">
   <input type="hidden" name="ticket_id" value="{{ complaint.ticket_id }}">
