@@ -52,3 +52,23 @@ This log records genuine development activities and working time. It will be upd
 - Improve the admin dashboard design.
 - Add more user-friendly features.
 - Perform final testing and documentation.
+## Feature Update: Website Notification System
+
+- Implemented a student notification system for complaint submission and status updates.
+- Added admin notifications for newly submitted complaints.
+- Added admin notifications when students submit feedback.
+- Implemented the mark-as-read functionality for admin notifications.
+- Tested all four notification scenarios successfully.
+- Email notifications are not configured yet.
+
+## Feature Update: Complaint Photo Upload
+
+- Added an optional photo upload feature to the complaint submission form.
+- Supported JPG, JPEG, and PNG image formats.
+- Implemented a maximum upload size of 5 MB.
+- Generated unique filenames for uploaded images.
+- Added photo display in the Admin Dashboard.
+- Allowed complaint submission without an image.
+- Added CSS styling for uploaded complaint photos.
+- Updated `.gitignore` to exclude uploaded photos.
+- Successfully tested complaint submissions with and without photos.
