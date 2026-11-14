@@ -1,44 +1,83 @@
+
 {% extends "base.html" %}
 {% block title %}Track Complaint{% endblock %}
+
 {% block content %}
 <div class="panel narrow">
   <h1>Track your complaint</h1>
+
   <form method="post">
-    <label>Ticket ID *</label><input name="ticket_id" placeholder="e.g. SC-A1B2C3" required>
-    <label>Email address used during submission *</label><input type="email" name="email" required>
+    <label>Ticket ID *</label>
+    <input name="ticket_id" placeholder="e.g. SC-A1B2C3" required>
+
+    <label>Email address used during submission *</label>
+    <input type="email" name="email" required>
+
     <button class="button" type="submit">Check status</button>
   </form>
+
   {% if complaint %}
   <div class="result">
     <h2>{{ complaint.ticket_id }}</h2>
+
     <p><strong>Category:</strong> {{ complaint.category }}</p>
     <p><strong>Location:</strong> {{ complaint.location }}</p>
     <p><strong>Description:</strong> {{ complaint.description }}</p>
     <p><strong>Submitted:</strong> {{ complaint.created_at }}</p>
-    <p><strong>Status:</strong><span class="status {{ complaint.status|lower|replace(' ', '-') }}">
-  {{ complaint.status }}
-</span></p>
+
+    <p>
+      <strong>Status:</strong>
+      <span class="status {{ complaint.status|lower|replace(' ', '-') }}">
+        {{ complaint.status }}
+      </span>
+    </p>
+
+    <!-- Student Notifications -->
+    <section class="notification-panel">
+      <h3>Notifications for this complaint</h3>
+
+      {% if notifications %}
+      <ul class="notification-list">
+        {% for notification in notifications %}
+        <li>
+          <strong>{{ notification.message }}</strong>
+          <small>{{ notification.created_at }}</small>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="muted">No notifications yet.</p>
+      {% endif %}
+    </section>
+
+    <!-- Student Feedback -->
     {% if complaint.status == "Resolved" %}
-<form method="post" action="{{ url_for('feedback') }}">
-  <input type="hidden" name="ticket_id" value="{{ complaint.ticket_id }}">
-  <input type="hidden" name="email" value="{{ complaint.email }}">
+    <form method="post" action="{{ url_for('feedback') }}">
+      <input type="hidden" name="ticket_id" value="{{ complaint.ticket_id }}">
+      <input type="hidden" name="email" value="{{ complaint.email }}">
 
-  {% if complaint.feedback %}
-  <div class="feedback-display">
-    <p><strong>Your previous feedback:</strong></p>
-    <p>{{ complaint.feedback }}</p>
-    <small>You can update your feedback below.</small>
-  </div>
-  {% endif %}
+      {% if complaint.feedback %}
+      <div class="feedback-display">
+        <p><strong>Your previous feedback:</strong></p>
+        <p>{{ complaint.feedback }}</p>
+        <small>You can update your feedback below.</small>
+      </div>
+      {% endif %}
 
-  <label>Feedback about the resolution</label>
-  <textarea name="feedback" rows="3" placeholder="Share or update your feedback" required></textarea>
+      <label>Feedback about the resolution</label>
+      <textarea name="feedback" rows="3"
+        placeholder="Share or update your feedback" required></textarea>
 
-  <button class="button" type="submit">
-    {% if complaint.feedback %}Update feedback{% else %}Send feedback{% endif %}
-  </button>
-</form>
-{% endif %}
+      <button class="button" type="submit">
+        {% if complaint.feedback %}
+          Update feedback
+        {% else %}
+          Send feedback
+        {% endif %}
+      </button>
+    </form>
+    {% endif %}
+
   </div>
   {% endif %}
 </div>

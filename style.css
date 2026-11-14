@@ -289,6 +289,24 @@ textarea{
   line-height:1.6;
   margin-bottom:0;
 }
+.notification-panel{
+  padding:18px;
+  border:1px solid #dce6f1;
+  border-radius:12px;
+  background:#ffffff;
+}
+.notification-panel h2,.notification-panel h3{margin-top:0}
+.notification-list{list-style:none;padding:0;margin:12px 0 0}
+.notification-list li{
+  padding:12px 14px;
+  border-bottom:1px solid #e6edf5;
+}
+.notification-list li:last-child{border-bottom:0}
+.notification-list li.unread{
+  border-left:4px solid #2878D0;
+  background:#f3f7fc;
+}
+.notification-list small{display:block;color:var(--muted);margin-top:4px}
 /* Professional Admin Complaints Table */
 
 .table-wrap{
@@ -347,6 +365,15 @@ textarea{
   background:#173B67;
   color:#ffffff;
   padding:16px 14px;
-  font - weight:700;
+  font-weight:700;
   text-align:left;
+}
+/* Complaint photo in Admin Dashboard */
+.complaint-photo {
+    width: 100px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #dbe3ee;
+    display: block;
 }

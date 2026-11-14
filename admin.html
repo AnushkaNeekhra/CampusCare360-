@@ -1,19 +1,172 @@
-{% extends "base.html" %}{% block title %}Admin Dashboard{% endblock %}
+
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
 {% block content %}
-<div class="heading-row admin-header">  <div>    <h1>Admin Dashboard</h1>    <p class="muted">Manage student complaints and monitor campus issues.</p>  </div>  <a class="button secondary" href="{{ url_for('admin_logout') }}">Log out</a></div>
-<section class="stats">  <div class="stat">    <span>Total Complaints</span>    <strong>{{ counts.total }}</strong>  </div>
-  <div class="stat">    <span>Pending</span>    <strong>{{ counts.pending }}</strong>  </div>
-  <div class="stat">    <span>In Progress</span>    <strong>{{ counts.progress }}</strong>  </div>
-  <div class="stat">    <span>Resolved</span>    <strong>{{ counts.resolved }}</strong>  </div></section>
-<div class="panel dashboard-section">  <h2>All Complaints</h2>
-  {% if complaints %}  <div class="table-wrap">    <table>      <thead>        <tr>          <th>Ticket</th>          <th>Student</th>          <th>Issue</th>          <th>Location</th>          <th>Status</th>          <th>Update</th>        </tr>      </thead>
-      <tbody>        {% for c in complaints %}        <tr>          <td>{{ c.ticket_id }}<small>{{ c.created_at }}</small></td>          <td>{{ c.student_name }}<small>{{ c.email }}</small></td>          <td><strong>{{ c.category }}</strong><small>{{ c.description }}</small></td>          <td>{{ c.location }}</td>
-          <td>            <span class="status {{ c.status|lower|replace(' ', '-') }}">              {{ c.status }}            </span>          </td>
-          <td>            <form class="inline-form" method="post"              action="{{ url_for('update_status', ticket_id=c.ticket_id) }}">
-              <select name="status">                {% for s in statuses %}                <option value="{{ s }}" {% if s == c.status %}selected{% endif %}>                  {{ s }}                </option>                {% endfor %}              </select>
-              <button class="button small" type="submit">Save</button>            </form>          </td>        </tr>        {% endfor %}      </tbody>    </table>  </div>
-  {% else %}  <p class="muted">No complaints have been submitted yet.</p>  {% endif %}</div>
-<div class="panel dashboard-section">  <h2>Student Feedback</h2>
-  {% set feedback_items = complaints|selectattr('feedback')|list %}
-  {% if feedback_items %}    {% for c in feedback_items %}    <div class="feedback-item">      <strong>{{ c.ticket_id }}</strong>      <p>{{ c.feedback }}</p>    </div>    {% endfor %}  {% else %}    <p class="muted">No student feedback received yet.</p>  {% endif %}</div>
+
+<div class="heading-row admin-header">
+  <div>
+    <h1>Admin Dashboard</h1>
+    <p class="muted">Manage student complaints and monitor campus issues.</p>
+  </div>
+  <a class="button secondary" href="{{ url_for('admin_logout') }}">Log out</a>
+</div>
+
+<!-- Dashboard Statistics -->
+<section class="stats">
+  <div class="stat">
+    <span>Total Complaints</span>
+    <strong>{{ counts.total }}</strong>
+  </div>
+  <div class="stat">
+    <span>Pending</span>
+    <strong>{{ counts.pending }}</strong>
+  </div>
+  <div class="stat">
+    <span>In Progress</span>
+    <strong>{{ counts.progress }}</strong>
+  </div>
+  <div class="stat">
+    <span>Resolved</span>
+    <strong>{{ counts.resolved }}</strong>
+  </div>
+</section>
+
+<!-- Admin Notifications -->
+<section class="panel dashboard-section notification-panel">
+  <div class="heading-row">
+    <div>
+      <h2>Admin Notifications</h2>
+      <p class="muted">
+        {{ unread_notifications }} unread complaints or feedback alerts
+      </p>
+    </div>
+
+    {% if unread_notifications > 0 %}
+    <form method="post"
+          action="{{ url_for('mark_admin_notifications_read') }}">
+      <button class="button small" type="submit">
+        Mark all as read
+      </button>
+    </form>
+    {% endif %}
+  </div>
+
+  {% if admin_notifications %}
+  <ul class="notification-list">
+    {% for notification in admin_notifications %}
+    <li class="{% if not notification.is_read %}unread{% endif %}">
+      <strong>{{ notification.message }}</strong>
+      <small>{{ notification.created_at }}</small>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="muted">No admin notifications yet.</p>
+  {% endif %}
+</section>
+
+<!-- All Complaints -->
+<div class="panel dashboard-section">
+  <h2>All Complaints</h2>
+
+  {% if complaints %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ticket</th>
+          <th>Student</th>
+          <th>Issue</th>
+          <th>Location</th>
+          <th>Photo</th>
+          <th>Status</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for c in complaints %}
+        <tr>
+          <td>
+            {{ c.ticket_id }}
+            <small>{{ c.created_at }}</small>
+          </td>
+
+          <td>
+            {{ c.student_name }}
+            <small>{{ c.email }}</small>
+          </td>
+
+          <td>
+            <strong>{{ c.category }}</strong>
+            <small>{{ c.description }}</small>
+          </td>
+
+          <td>{{ c.location }}</td>
+
+<td>
+    {% if c.photo_filename %}
+        <img
+            src="{{ url_for('static', filename='uploads/' ~ c.photo_filename) }}"
+            alt="Complaint photo"
+            class="complaint-photo"
+        >
+    {% else %}
+        <span class="muted">No photo</span>
+    {% endif %}
+</td>
+
+<td>
+    <span class="status {{ c.status|lower|replace(' ', '-') }}">
+        {{ c.status }}
+    </span>
+</td>
+
+          <td>
+            <form class="inline-form"
+                  method="post"
+                  action="{{ url_for('update_status', ticket_id=c.ticket_id) }}">
+
+              <select name="status">
+                {% for s in statuses %}
+                <option value="{{ s }}"
+                  {% if s == c.status %}selected{% endif %}>
+                  {{ s }}
+                </option>
+                {% endfor %}
+              </select>
+
+              <button class="button small" type="submit">Save</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% else %}
+  <p class="muted">No complaints have been submitted yet.</p>
+  {% endif %}
+</div>
+
+<!-- Student Feedback -->
+<div class="panel dashboard-section">
+  <h2>Student Feedback</h2>
+
+  {% set feedback_items = complaints|selectattr('feedback')|list %}
+
+  {% if feedback_items %}
+    {% for c in feedback_items %}
+    <div class="feedback-item">
+      <strong>{{ c.ticket_id }}</strong>
+      <p>{{ c.feedback }}</p>
+    </div>
+    {% endfor %}
+  {% else %}
+    <p class="muted">No student feedback received yet.</p>
+  {% endif %}
+</div>
+
 {% endblock %}
