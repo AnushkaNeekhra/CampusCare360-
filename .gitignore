@@ -1,5 +1,6 @@
 venv/
-_pycache__/
+__pycache__/
 *.pyc
 complaints.db
 .env 
+static/uploads/
